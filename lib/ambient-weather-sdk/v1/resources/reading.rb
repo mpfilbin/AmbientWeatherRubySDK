@@ -6,6 +6,13 @@ module AmbientWeatherSDK
       # A Reading is a collection of information recorded from a Device
       class Reading
 
+        attr_reader :winddir, :windspeedmph, :windgustmph, :maxdailygust,
+                    :windgustdir, :winddir_avg2m, :windspdmph_avg2m,
+                    :winddir_avg10m, :windspdmph_avg10m, :tempf, :humidity,
+                    :baromrelin, :baromabsin, :tempinf, :humidityin,
+                    :hourlyrainin, :dailyrainin, :monthlyrainin, :yearlyrainin,
+                    :feelsLike, :dewPoint, :date, :dateutc
+
         private_class_method :new
 
         class << self
@@ -16,21 +23,11 @@ module AmbientWeatherSDK
         end
 
         def initialize(json_payload = {})
-          json_payload.each { |key, value | instance_variable_set("@#{key}", value) }
+          json_payload.each do |key, value|
+            instance_variable_set("@#{key}", value)
+          end
         end
 
-        def wind_speed
-          windspeedmph
-        end
-
-        private
-
-        attr_reader :winddir, :windspeedmph, :windgustmph, :maxdailygust,
-                    :windgustdir, :winddir_avg2m, :windspdmph_avg2m,
-                    :winddir_avg10m, :windspdmph_avg10m, :tempf, :humidity,
-                    :baromrelin, :baromabsin, :tempinf, :humidityin,
-                    :hourlyrainin, :dailyrainin, :monthlyrainin, :yearlyrainin,
-                    :feelsLike, :dewPoint, :date, :dateutc
       end
     end
   end
